@@ -1,0 +1,48 @@
+{
+  "manifest_version": 2,
+  "mod": {
+    "id": "browser-hide-plugins",
+    "name": "Browser: Hide Plug-ins",
+    "version": "1.0.0",
+    "author": "Photep",
+    "description": "Hide plug-ins you never want to add from Bitwig's browser: right-click a plug-in > Hide from Browser, or hide a whole vendor or format. The Hidden Plug-ins panel, beside the Browser, lists and searches them, with a checkbox to show each again. They stay installed, so projects that use them still open.",
+    "documentation": "readme",
+    "homepage": "https://github.com/Photep/bitwig-hide-plugins"
+  },
+  "built_against": {
+    "bitwig_version": "6.1.4",
+    "platform": "macos",
+    "architecture": "universal"
+  },
+  "resources": {
+    "hidden_icon": {
+      "kind": "bitwig",
+      "path": "icons/layer_hidden.svg"
+    },
+    "readme": {
+      "kind": "file",
+      "path": "README.md",
+      "media_type": "text/markdown"
+    }
+  },
+  "registrations": [
+    {
+      "id": "actions",
+      "consumer": "action-menu-composition-framework",
+      "descriptor": "actions.properties",
+      "jar": "helper.jar"
+    },
+    {
+      "id": "preferences",
+      "consumer": "preferences-composition-framework",
+      "descriptor": "preferences.properties",
+      "jar": "helper.jar"
+    },
+    {
+      "id": "panels",
+      "consumer": "panel-management-framework",
+      "descriptor": "panels.properties",
+      "jar": "helper.jar"
+    }
+  ]
+}
