@@ -15,6 +15,10 @@ Typical uses:
 Hidden plug-ins stay installed and scanned: projects that use them open and play as before. Only the
 browser's results leave them out, in the side browser and the pop-up browser.
 
+| Right-click a plug-in to hide it, its vendor or its format | The Hidden Plug-ins panel |
+|---|---|
+| ![The browser's right-click menu with Hide from Browser, Hide All from This Vendor and Hide All VST3 Plug-ins](images/right-click-menu.png) | ![The Hidden Plug-ins panel: a search field and a list of hidden plug-ins with vendors and checkboxes](images/hidden-plugins-panel.png) |
+
 ## Requirements
 
 - Patchbay Mod Loader 0.36.0-dev.17 or newer, with its **Framework: Actions and Menus**,
