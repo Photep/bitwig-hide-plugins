@@ -21,8 +21,8 @@ browser's results leave them out, in the side browser and the pop-up browser.
   **Framework: Settings** and **Framework: Panels** (Patchbay ticks them with the mod).
 - Bitwig Studio 6.x, as far as Patchbay supports it.
 
-**Tested on:** macOS, Bitwig Studio 6.1.7. It passes Patchbay's offline check on macOS 6.1.1, 6.1.3 and
-6.1.4. Windows and Linux are untested: Patchbay translates the mod to them, but nobody has tried it there
+**Tested on:** macOS, Bitwig Studio 6.1.4 and 6.1.7. It passes Patchbay's offline check on macOS 6.1.1 and
+6.1.3. Windows and Linux are untested: Patchbay translates the mod to them, but nobody has tried it there
 yet. Reports are welcome.
 
 ## Install
