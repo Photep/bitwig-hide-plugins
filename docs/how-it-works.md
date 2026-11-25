@@ -20,8 +20,17 @@ as it moves the cursor over every record of the index.
 - For CLAP, Bitwig returns `null` (nothing is redundant).
 - A record's details can only be read while the supplier runs, not when it is built.
 
-The mod wraps that supplier (`HideHooks.redundantTest`, a `WRAP_RETURN` hook with `allReturns`): a record
-is redundant if the mod hides it, otherwise Bitwig's own answer stands. Per record it reads:
+Bitwig only adds that term when the search's kinds include plug-ins, the setting is on and at least one
+"prefer" setting is on (`OO.Hnt` returns no term otherwise), and some views (the pop-up browser's All
+Instruments, for one) run without it. So the mod doesn't rely on Bitwig's term. It adds one of its own to
+every search: a `WRAP_RETURN` hook on `Jp.nfq` returns `rXv.cfM(bitwigFilter, ours)`, where `ours` is
+`new OP(OO.cfM(), true, false, false, false)`: a filtering term with all three "prefer" switches off, a
+combination Bitwig never makes, which is how the second hook recognises it (`OP`'s constructor and those
+three fields are opened through the manifest). Being Bitwig's own class, the term needs none of the
+filter plumbing written again.
+
+The second hook (`HideHooks.redundantTest`, `WRAP_RETURN` with `allReturns` on `OP.cfM`) answers the
+tests of the mod's term from the user's list, and leaves Bitwig's own terms untouched. Per record it reads:
 
 | What | Call |
 |---|---|
@@ -39,7 +48,7 @@ immutable snapshot read on Bitwig's library thread; every exception is caught an
 
 ## Refreshing the browser
 
-An `ENTRY` hook on `Jp.nfq` remembers each session (weakly). After a change, the mod calls each
+The hook on `Jp.nfq` also remembers each session (weakly). After a change, the mod calls each
 session's own "run the search again", `Jp.HhX()` (private in Bitwig; opened through the manifest's
 `opens`). It returns at once for a session that isn't active.
 

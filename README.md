@@ -20,8 +20,6 @@ browser's results leave them out, in the side browser and the pop-up browser.
 - Patchbay Mod Loader 0.36.0-dev.17 or newer, with its **Framework: Actions and Menus**,
   **Framework: Settings** and **Framework: Panels** (Patchbay ticks them with the mod).
 - Bitwig Studio 6.x, as far as Patchbay supports it.
-- Bitwig's own **Should hide redundant Plug-ins** setting must be on (it is by default): Dashboard →
-  Settings → Locations → Plug-in Locations.
 
 **Tested on:** macOS, Bitwig Studio 6.1.7. It passes Patchbay's offline check on macOS 6.1.1, 6.1.3 and
 6.1.4. Windows and Linux are untested: Patchbay translates the mod to them, but nobody has tried it there
@@ -56,11 +54,9 @@ yet. Reports are welcome.
 
 ## Notes and limits
 
-- Hiding works through Bitwig's own redundant plug-in filter, so with **Should hide redundant Plug-ins**
-  off, nothing is hidden. Hidden plug-ins count in Bitwig's hidden plug-in count when **Show hidden
-  plug-in count in Browser** is on.
+- Hiding doesn't depend on any Bitwig setting: the mod adds its own filter to every browser search.
 - For duplicate formats of one plug-in (VST2, VST3, CLAP), Bitwig's own settings do the job: **Should
-  hide redundant Plug-ins** and **Prefer CLAP over VST (when available)**.
+  hide redundant Plug-ins** and **Prefer CLAP over VST (when available)**. They work alongside the mod.
 - A plug-in hidden by a rule can't be shown on its own: untick the rule.
 - A plug-in is identified by its format, its bundle's file name and its name. Two copies of the same
   bundle in different folders are hidden together.

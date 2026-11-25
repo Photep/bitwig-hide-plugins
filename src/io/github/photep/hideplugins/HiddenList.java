@@ -36,7 +36,7 @@ final class HiddenList {
     private static final String RULE_FORMAT = "format";
 
     /** An immutable view, swapped whole, so the library thread reads it without locks. */
-    record Snapshot(boolean enabled, Set<String> keys, Set<String> names, Set<String> formats,
+    record Snapshot(boolean enabled, Set<String> keys, Set<String> names, Set<String> looseNames, Set<String> formats,
                     Set<String> rules, Set<String> ruleFormats, Set<String> ruleVendors) {
         /** Whether anything of this format could be hidden now: the cheap first check per record. */
         boolean hides(String format) {
@@ -134,7 +134,10 @@ final class HiddenList {
 
     static synchronized void add(Set<String> keys) {
         Set<String> all = new LinkedHashSet<>(snapshot().keys());
-        if (all.addAll(keys)) save(all, snapshot().rules());
+        if (all.addAll(keys)) {
+            save(all, snapshot().rules());
+            for (String key : keys) MOD.log("hidden: " + key.replace('\t', '|'));
+        }
     }
 
     static synchronized void remove(Set<String> keys) {
@@ -226,11 +229,12 @@ final class HiddenList {
     }
 
     private static Snapshot build(boolean enabled, Set<String> keys, Set<String> rules) {
-        Set<String> names = new LinkedHashSet<>(), formats = new LinkedHashSet<>();
+        Set<String> names = new LinkedHashSet<>(), looseNames = new LinkedHashSet<>(), formats = new LinkedHashSet<>();
         for (String key : keys) {
             String[] parts = key.split("\t", 3);
             formats.add(parts[0]);
             names.add(parts[2]);
+            looseNames.add(HideHooks.loose(parts[2])); // for the filter's near-miss log
         }
         Set<String> ruleFormats = new LinkedHashSet<>(), ruleVendors = new LinkedHashSet<>();
         for (String rule : rules) {
@@ -239,7 +243,7 @@ final class HiddenList {
             else ruleVendors.add(parts[1].toLowerCase(Locale.ROOT)); // vendors compare without case
         }
         return new Snapshot(enabled, Collections.unmodifiableSet(new LinkedHashSet<>(keys)),
-                Collections.unmodifiableSet(names), Collections.unmodifiableSet(formats),
+                Collections.unmodifiableSet(names), Collections.unmodifiableSet(looseNames), Collections.unmodifiableSet(formats),
                 Collections.unmodifiableSet(new LinkedHashSet<>(rules)),
                 Collections.unmodifiableSet(ruleFormats), Collections.unmodifiableSet(ruleVendors));
     }
