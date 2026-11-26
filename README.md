@@ -21,8 +21,10 @@ browser's results leave them out, in the side browser and the pop-up browser.
 
 ## Requirements
 
-- Patchbay Mod Loader 0.36.0-dev.17 or newer, with its **Framework: Actions and Menus**,
-  **Framework: Settings** and **Framework: Panels** (Patchbay ticks them with the mod).
+- Patchbay Mod Loader 0.36.0-dev.17 or newer, with its **Framework: Actions and Menus** 0.9.0-dev.4,
+  **Framework: Settings** and **Framework: Panels** 0.3.0-dev.8 or newer (Patchbay ticks them with the
+  mod). The 0.36.0-dev.17 zips first published held Panels 0.2.0-dev.2, which can't put the Hidden
+  Plug-ins button beside the browser's: if Patchbay says Panels is too old, download Patchbay again.
 - Bitwig Studio 6.x, as far as Patchbay supports it.
 
 **Tested on:** macOS, Bitwig Studio 6.1.4 and 6.1.7. It passes Patchbay's offline check on macOS 6.1.1 and
